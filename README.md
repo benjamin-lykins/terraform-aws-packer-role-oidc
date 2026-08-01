@@ -26,7 +26,7 @@ Trust is scoped to repositories under **`benjamin-lykins`** by default.
 | `role_name` | no | `github-actions-packer` | IAM role name |
 | `github_organization` | no | `benjamin-lykins` | GitHub owner |
 | `oidc_subject_claim` | no | `*` | e.g. `ref:refs/heads/main` or `environment:prod` |
-| `create_oidc_provider` | no | `false` | Set `true` only on first use in the AWS account |
+| `create_oidc_provider` | no | `true` | Set `false` if the GitHub OIDC provider already exists in the account |
 | `tags` | no | `{}` | Resource tags |
 
 Copy the `role_arn` output into your workflow.
@@ -81,7 +81,7 @@ Audience is always `sts.amazonaws.com`.
 
 ## OIDC provider note
 
-AWS allows **one** IAM OIDC provider per URL per account. Keep `create_oidc_provider = false` (default) when the GitHub provider already exists; the module looks it up by URL. Set `true` only for the first GitHub OIDC setup in that account.
+AWS allows **one** IAM OIDC provider per URL per account. The default `create_oidc_provider = true` creates it on first use. If the provider already exists (e.g. from another workspace), set `create_oidc_provider = false` so the module looks it up by URL instead.
 
 ## Permissions
 

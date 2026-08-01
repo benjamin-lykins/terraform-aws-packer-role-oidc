@@ -28,9 +28,9 @@ variable "oidc_subject_claim" {
 }
 
 variable "create_oidc_provider" {
-  description = "Create the GitHub Actions OIDC identity provider. Set true only if one does not already exist in this AWS account (AWS allows one per URL)."
+  description = "Create the GitHub Actions OIDC identity provider. Default true for first-time setup. Set false if token.actions.githubusercontent.com already exists in this AWS account (AWS allows one per URL)."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "tags" {
